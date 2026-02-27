@@ -27,6 +27,7 @@
 * [Can ripgrep replace grep?](#posix4ever)
 * [What does the "rip" in ripgrep mean?](#intentcountsforsomething)
 * [How can I donate to ripgrep or its maintainers?](#donations)
+* [How can I use ripgrep for multi-file edits?](#multifile-edits)
 
 
 <h3 name="config">
@@ -920,6 +921,32 @@ Additionally, Facebook has a tool called
 that uses some of the same libraries as ripgrep and might provide a more
 ergonomic search-and-replace experience.
 
+<h3 name="multifile-edits">
+How can I use ripgrep for multi-file edits?
+</h3>
+
+ripgrep is primarily a search tool and doesn't modify files directly. However, for multi-file edits, you can use **ripgrep-edit**, a companion tool that builds on ripgrep's search capabilities to enable efficient multi-file editing workflows.
+
+**ripgrep-edit** works by:
+1. Using ripgrep to find matches across multiple files
+2. Presenting the results in a clean, linear format with context
+3. Allowing you to edit all matches in a single temporary file
+4. Applying changes back to the original files
+
+This is particularly useful when:
+- Working with LLMs that need to understand code context across files
+- Making consistent changes across a codebase
+- Resolving git conflicts
+- Refactoring code that spans multiple files
+
+Example usage:
+```bash
+rg-edit -e "function\s*\(" -E vim src/
+```
+
+For Emacs users, there's also an `rg-edit.el` package that integrates with Emacs and provides convenient functions like `rg-edit-git` (bound to `C-c r`) for searching within git repositories.
+
+See the [ripgrep-edit documentation](https://gitlab.com/aarcange/ripgrep-edit) for more details.
 
 <h3 name="license">
 How is ripgrep licensed?
